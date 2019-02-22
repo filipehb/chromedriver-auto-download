@@ -47,6 +47,7 @@ class Downloader:
         with urllib.request.urlopen(self.url) as response, open("chromedriver.zip", 'wb') as out_file:
             shutil.copyfileobj(response, out_file)
             self.file_path = os.path.dirname(__file__) + self.separator + "chromedriver.zip"
+            self.file_exec_path = os.path.dirname(__file__) + self.separator
             print("file_path: {0}".format(self.file_path))
         self.__extractArchive(dir_to_extract)
 

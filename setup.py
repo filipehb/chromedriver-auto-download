@@ -8,9 +8,13 @@ def main(argv):
   print("Argument: {0}".format(str(argv)))
   down = Downloader(plt.system())
   down.downloadDriver(str(argv))
-  #env = Environment(plt.system(), down.file_path)
+  print("file_exec_path: {0}".format(down.file_exec_path))
+  Environment(plt.system(), down.file_exec_path)
 
   
   
 if __name__== "__main__":
-  main(sys.argv[1])
+  try:
+    main(sys.argv[1])
+  except IndexError:
+    print("invalid quantity of arguments")

@@ -5,19 +5,28 @@ import sys
 class Environment:
 
     def __linuxEnv(self):
-        os.environ['CHROMEDRIVER_PATH'] = self.file_path
-        return "Linux"
+        """Set chrome environment on Linux"""
+        # TODO Need to test
+        print('Command: PATH="{0}:$PATH"'.format(self.file_path + "chromedriver"))
+        os.system("PATH=\"{0}:$PATH\"".format(self.file_path + "chromedriver"))
     
     def __windowsEnv(self):
-        os.environ['CHROMEDRIVER_PATH'] = self.file_path
-        return "Windows"
+        """Set chrome environment on Windows"""
+        print('Command: setx Path "%Path%;{0}"'.format(self.file_path + "chromedriver.exe"))
+        os.system("setx Path \"%Path%;{0}\"".format(self.file_path + "chromedriver.exe"))
 
     def __setEnv(self):
-        platform_list = {
-            1: self.__linuxEnv(),
-            2: self.__windowsEnv()
-        }
-        platform_list.get(self.platform, lambda: "Invalid argument")
+        """Switch between platforms.
+
+        Variables:
+        separator -- platform directory separator
+        """
+        if self.platform == "Linux":
+            self.__linuxEnv()
+        elif self.platform == "Windows":
+            self.__windowsEnv()
+        else:
+            print("Invalid platform argument")
 
     def __init__(self, platform, file_path):
         self.platform = platform
