@@ -12,8 +12,8 @@ class Environment:
     
     def __windowsEnv(self):
         """Set chrome environment on Windows"""
-        print('Command: setx Path "%Path%;{0}"'.format(self.file_path + "chromedriver.exe"))
-        os.system("setx Path \"%Path%;{0}\"".format(self.file_path + "chromedriver.exe"))
+        print('Command: setx Path "%Path%;{0}"'.format(self.file_path))
+        os.system("setx Path \"%Path%;{0}\"".format(self.file_path))
 
     def __setEnv(self):
         """Switch between platforms.
